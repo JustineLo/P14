@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { TextField, Button } from '@mui/material';
-import { OptionType } from './FormSelect';
+import FormSelect, { OptionType } from './FormSelect';
 import { states } from '../data/states';
+import { departments } from '../data/departments';
 
 function Form() {
 
@@ -9,7 +10,7 @@ function Form() {
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [startDate, setStartDate] = useState('');
-  const [department, setDepartment] = useState('');
+  const [department, setDepartment] = useState<OptionType>(departments[0]);
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [selectedState, setSelectedState] = useState<OptionType>(states[0]);
@@ -21,10 +22,10 @@ function Form() {
       lastName,
       dateOfBirth,
       startDate,
-      department,
+      department: department.name,
       street,
       city,
-      state: selectedState.abbreviation,
+      state: selectedState.name,
       zipCode
     };
     console.log(employee);
@@ -40,8 +41,10 @@ function Form() {
         <legend>Address</legend>
         <TextField label="Street" id="street" value={street} onChange={(event) => setStreet(event.target.value)} />
         <TextField label="City" id="city" value={city} onChange={(event) => setCity(event.target.value)} />
+        <FormSelect options={states} value={selectedState} onChange={(option: OptionType) => setSelectedState(option)} />
         <TextField id="zip-code" label="Zip Code" type="number" value={zipCode} onChange={(event) => setZipCode(event.target.value)} />
       </fieldset>
+      <FormSelect options={departments} value={department} onChange={(option: OptionType) => setDepartment(option)} />
       <Button variant="contained" onClick={handleSave}>Save</Button>
     </form>
   )
