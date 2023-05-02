@@ -7,7 +7,7 @@ import EmployeesList from './pages/EmployeesList';
 export const EmployeesContext = createContext(localStorage.getItem('employees') ? JSON.parse(localStorage.getItem('employees') as string) : []);
 
 function App() {
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState(localStorage.getItem('employees') ? JSON.parse(localStorage.getItem('employees') as string) : []);
 
   return (
     <EmployeesContext.Provider value={{ employees, setEmployees }}>

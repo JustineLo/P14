@@ -1,5 +1,6 @@
 import { Button, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { EmployeesContext } from '../App';
 import { departments } from '../data/departments';
 import { states } from '../data/states';
 import { Employee } from '../data/type';
@@ -7,6 +8,7 @@ import FormSelect, { OptionType } from './FormSelect';
 
 function CreateEmployeeForm() {
 
+  const { employees, setEmployees } = useContext(EmployeesContext);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
@@ -18,7 +20,6 @@ function CreateEmployeeForm() {
   const [zipCode, setZipCode] = useState('');
 
   const handleSave = () => {
-    const employeesList: Employee[] = localStorage.getItem('employees') ? JSON.parse(localStorage.getItem('employees') as string) : [];
     const newEmployee: Employee = {
       firstName,
       lastName,
@@ -30,7 +31,8 @@ function CreateEmployeeForm() {
       state: selectedState.name,
       zipCode
     };
-    const updatedEmployeesList: Employee[] = [...employeesList, newEmployee];
+    const updatedEmployeesList: Employee[] = [...employees, newEmployee];
+    setEmployees(updatedEmployeesList);
     localStorage.setItem('employees', JSON.stringify(updatedEmployeesList));
   };
 
