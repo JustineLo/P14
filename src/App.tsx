@@ -1,13 +1,15 @@
-import './App.css'
-import Form from './components/Form'
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import CreateEmployee from './pages/CreateEmployee';
+import EmployeesList from './pages/EmployeesList';
 
 function App() {
 
   return (
-    <div id="app">
-    
-      <Form />
-    </div>
+    <Routes>
+      <Route path="/" element={<CreateEmployee />} />
+      <Route path="/employees-list" element={<EmployeesList />} />
+    </Routes>
   )
 }
 
