@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import { departments } from '../data/departments';
 import { states } from '../data/states';
+import { Employee } from '../data/type';
 import FormSelect, { OptionType } from './FormSelect';
 
 function CreateEmployeeForm() {
@@ -17,7 +18,8 @@ function CreateEmployeeForm() {
   const [zipCode, setZipCode] = useState('');
 
   const handleSave = () => {
-    const employee = {
+    const employeesList: Employee[] = localStorage.getItem('employees') ? JSON.parse(localStorage.getItem('employees') as string) : [];
+    const newEmployee: Employee = {
       firstName,
       lastName,
       dateOfBirth,
@@ -28,13 +30,14 @@ function CreateEmployeeForm() {
       state: selectedState.name,
       zipCode
     };
-    console.log(employee);
+    const updatedEmployeesList: Employee[] = [...employeesList, newEmployee];
+    localStorage.setItem('employees', JSON.stringify(updatedEmployeesList));
   };
 
   return (
     <>
       <h2>Create Employee</h2>
-      <form action="#" className="creation-form">
+      <form className="creation-form">
         <TextField label="First Name" id="first-name" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
         <TextField label="Last Name" id="last-name" value={lastName} onChange={(event) => setLastName(event.target.value)} />
         <TextField label="Date of Birth" id="date-of-birth" type="date" InputLabelProps={{ shrink: true }} value={dateOfBirth} onChange={(event) => setDateOfBirth(event.target.value)} />
