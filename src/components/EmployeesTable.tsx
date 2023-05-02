@@ -1,72 +1,21 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
+  flexRender
 } from '@tanstack/react-table';
-import { Employee } from '../data/type';
 
 interface EmployeesTableProps {
-  employees: Employee[];
+  table: any;
 }
 
-function EmployeesTable({ employees }: EmployeesTableProps) {
- 
-  const columnHelper = createColumnHelper<Employee>()
-
-  const columns = [
-    columnHelper.accessor('firstName', {
-      cell: info => info.getValue(),
-      header: () => <span>First Name</span>
-    }),
-    columnHelper.accessor('lastName', {
-      cell: info => info.getValue(),
-      header: () => <span>Last Name</span>
-    }),
-    columnHelper.accessor('startDate', {
-      cell: info => info.getValue(),
-      header: () => <span>Start Date</span>
-    }),
-    columnHelper.accessor('department', {
-      cell: info => info.getValue(),
-      header: () => <span>Department</span>
-    }),
-    columnHelper.accessor('dateOfBirth', {
-      cell: info => info.getValue(),
-      header: () => <span>Date of Birth</span>
-    }),
-    columnHelper.accessor('street', {
-      cell: info => info.getValue(),
-      header: () => <span>Street</span>
-    }),
-    columnHelper.accessor('city', {
-      cell: info => info.getValue(),
-      header: () => <span>City</span>
-    }),
-    columnHelper.accessor('state', {
-      cell: info => info.getValue(),
-      header: () => <span>State</span>
-    }),
-    columnHelper.accessor('zipCode', {
-      cell: info => info.getValue(),
-      header: () => <span>Zip Code</span>
-    }),
-  ]
-
-  const table = useReactTable({
-    data: employees,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  })
+function EmployeesTable({ table }: EmployeesTableProps) {
 
   return (
     <TableContainer component={Paper}>
       <Table>
         <TableHead>
-          {table.getHeaderGroups().map(headerGroup => (
+          {table.getHeaderGroups().map((headerGroup: any) => (
             <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map(header => (
+              {headerGroup.headers.map((header: any) => (
                 <TableCell key={header.id}>
                   {flexRender(
                         header.column.columnDef.header,
@@ -78,9 +27,9 @@ function EmployeesTable({ employees }: EmployeesTableProps) {
           ))}
         </TableHead>
         <TableBody>
-          {table.getRowModel().rows.map(row => (
+          {table.getRowModel().rows.map((row: any) => (
             <TableRow key={row.id}>
-              {row.getVisibleCells().map(cell => (
+              {row.getVisibleCells().map((cell: any) => (
                 <TableCell key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>

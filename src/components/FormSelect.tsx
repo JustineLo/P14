@@ -18,7 +18,7 @@ function FormSelect({ options, value, onChange }: FormSelectProps) {
     if (newValue) {
       onChange(newValue);
     }
-  };
+  }
 
   return (
     <Select
