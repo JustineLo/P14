@@ -2,6 +2,8 @@ import { createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/re
 import { useContext } from "react";
 import { EmployeesContext } from "../App";
 import EmployeesTable from "../components/EmployeesTable";
+import TableFooter from "../components/TableFooter";
+import TableHeader from "../components/TableHeader";
 import { Employee } from "../data/type";
 
 const columnHelper = createColumnHelper<Employee>();
@@ -54,9 +56,11 @@ function EmployeesList() {
     })
 
   return (
-    <div id="create-employee">
-      <h1>HRNet</h1>
-        <EmployeesTable table={table} />
+    <div id="employees-list">
+      <h1>Current Employees</h1>
+      <TableHeader table={table} />
+      <EmployeesTable table={table} />
+      <TableFooter table={table} />
     </div>
   )
 }
