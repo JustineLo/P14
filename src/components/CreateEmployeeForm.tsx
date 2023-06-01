@@ -5,6 +5,7 @@ import { departments } from '../data/departments';
 import { states } from '../data/states';
 import { Employee } from '../data/type';
 import FormSelect, { OptionType } from './FormSelect';
+import Modal from './Modal';
 
 function CreateEmployeeForm() {
 
@@ -18,8 +19,10 @@ function CreateEmployeeForm() {
   const [city, setCity] = useState('');
   const [selectedState, setSelectedState] = useState<OptionType>(states[0]);
   const [zipCode, setZipCode] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handleSave = () => {
+    setShowModal(true);
     const newEmployee: Employee = {
       firstName,
       lastName,
@@ -54,6 +57,9 @@ function CreateEmployeeForm() {
         <FormSelect options={departments} value={department} onChange={(option: OptionType) => setDepartment(option)} />
         <Button variant="contained" onClick={handleSave}>Save</Button>
       </form>
+      <Modal show={showModal} onClose={() => setShowModal(false)}> 
+        <h2>Employee Created!</h2>
+      </Modal>
     </>
     
   )
