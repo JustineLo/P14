@@ -1,4 +1,5 @@
 import React from 'react';
+import './Modal.css';
 
 interface ModalProps {
     show: boolean;
@@ -15,9 +16,11 @@ function Modal ({ show, onClose, children }: ModalProps){
     <div className="modal-backdrop">
       <div className="modal-container">
         {children}
+        <div className="modal-footer">
           <button onClick={onClose}>
             Close
           </button>
+        </div>
       </div>
     </div>
   );

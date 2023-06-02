@@ -5,6 +5,7 @@ import EmployeesTable from "../components/EmployeesTable";
 import TableFooter from "../components/TableFooter";
 import TableHeader from "../components/TableHeader";
 import { Employee } from "../data/type";
+import { Link } from "react-router-dom";
 
 const columnHelper = createColumnHelper<Employee>();
 const columns = [
@@ -58,9 +59,12 @@ function EmployeesList() {
   return (
     <div id="employees-list">
       <h1>Current Employees</h1>
-      <TableHeader table={table} />
-      <EmployeesTable table={table} />
-      <TableFooter table={table} />
+      <div className="employees-table">
+        <TableHeader table={table} />
+        <EmployeesTable table={table} />
+        <TableFooter table={table} />
+      </div>
+      <Link to="/">Home</Link>
     </div>
   )
 }

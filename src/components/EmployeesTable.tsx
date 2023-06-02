@@ -17,10 +17,23 @@ function EmployeesTable({ table }: EmployeesTableProps) {
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header: any) => (
                 <TableCell key={header.id}>
-                  {flexRender(
+                  <div
+                    {...{
+                      className: header.column.getCanSort()
+                        ? 'cursor-pointer select-none'
+                        : '',
+                      onClick: header.column.getToggleSortingHandler(),
+                    }}
+                  >
+                    {flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
+                    {{
+                      asc: ' 🔼',
+                      desc: ' 🔽',
+                    }[header.column.getIsSorted() as string] ?? null}
+                  </div>
                 </TableCell>
               ))}
             </TableRow>

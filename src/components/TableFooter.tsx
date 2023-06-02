@@ -12,18 +12,16 @@ function TableFooter({table}: TableFooterProps) {
             </span>
             <div className="pagination-buttons">
                 <button
-                    className="border rounded p-1"
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                 >
-                    {'<'}
+                    Previous
                 </button>
                 <button
-                    className="border rounded p-1"
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                 >
-                    {'>'}
+                    Next
                 </button>
             </div>
         </div>
