@@ -1,11 +1,11 @@
 import { createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useContext } from "react";
-import { EmployeesContext } from "../App";
 import EmployeesTable from "../components/EmployeesTable";
 import TableFooter from "../components/TableFooter";
 import TableHeader from "../components/TableHeader";
 import { Employee } from "../data/type";
 import { Link } from "react-router-dom";
+import { EmployeesContext } from "../context/EmployeesContext";
 
 const columnHelper = createColumnHelper<Employee>();
 const columns = [

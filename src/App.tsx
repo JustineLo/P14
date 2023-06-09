@@ -1,11 +1,10 @@
-import { createContext, useState } from 'react';
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Employee } from './data/type';
 import CreateEmployee from './pages/CreateEmployee';
 import EmployeesList from './pages/EmployeesList';
-
-export const EmployeesContext = createContext(localStorage.getItem('employees') ? JSON.parse(localStorage.getItem('employees') as string) : []);
+import { EmployeesContext } from './context/EmployeesContext';
 
 function App() {
   const [employees, setEmployees] = useState<Employee[]>(localStorage.getItem('employees') ? JSON.parse(localStorage.getItem('employees') as string) : []);

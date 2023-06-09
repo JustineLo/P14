@@ -1,12 +1,11 @@
 import { Button, TextField } from '@mui/material';
 import { useContext, useState } from 'react';
-import { EmployeesContext } from '../App';
 import { departments } from '../data/departments';
 import { states } from '../data/states';
 import { Employee } from '../data/type';
 import FormSelect, { OptionType } from './FormSelect';
-import Modal from './Modal';
-
+import Modal from 'ts-simple-modal';
+import { EmployeesContext } from '../context/EmployeesContext';
 
 function CreateEmployeeForm() {
 
@@ -23,7 +22,6 @@ function CreateEmployeeForm() {
   const [showModal, setShowModal] = useState(false);
 
   const handleSave = () => {
-    setShowModal(true);
     const newEmployee: Employee = {
       firstName,
       lastName,
@@ -38,6 +36,7 @@ function CreateEmployeeForm() {
     const updatedEmployeesList: Employee[] = [...employees, newEmployee];
     setEmployees(updatedEmployeesList);
     localStorage.setItem('employees', JSON.stringify(updatedEmployeesList));
+    setShowModal(true);
   };
 
   return (
