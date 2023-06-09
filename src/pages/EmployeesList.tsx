@@ -1,5 +1,5 @@
-import { createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { useContext } from "react";
+import { SortingState, createColumnHelper, getCoreRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
+import { useContext, useState } from "react";
 import EmployeesTable from "../components/EmployeesTable";
 import TableFooter from "../components/TableFooter";
 import TableHeader from "../components/TableHeader";
@@ -50,10 +50,17 @@ const columns = [
 function EmployeesList() {
     const { employees } = useContext(EmployeesContext);
 
+    const [sorting, setSorting] = useState<SortingState>([]);
+
     const table = useReactTable({
         data: employees,
         columns,
+        state: {
+            sorting
+        },
+        onSortingChange: setSorting,
         getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
     })
 
   return (
