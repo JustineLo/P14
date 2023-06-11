@@ -1,4 +1,4 @@
-import { SortingState, createColumnHelper, getCoreRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
+import { SortingState, createColumnHelper, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 import { useContext, useState } from "react";
 import EmployeesTable from "../components/EmployeesTable";
 import TableFooter from "../components/TableFooter";
@@ -47,20 +47,26 @@ const columns = [
   }),
 ]
 
+
 function EmployeesList() {
     const { employees } = useContext(EmployeesContext);
 
     const [sorting, setSorting] = useState<SortingState>([]);
+    const [globalFilter, setGlobalFilter] = useState<string>('');
 
     const table = useReactTable({
         data: employees,
         columns,
         state: {
-            sorting
+            sorting,
+            globalFilter
         },
         onSortingChange: setSorting,
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: getPaginationRowModel (),
+        onGlobalFilterChange: setGlobalFilter,
     })
 
   return (
